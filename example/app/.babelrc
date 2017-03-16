@@ -1,4 +1,3 @@
 {
-  "presets": ["react-native"],
-  "ignore": ["build"]
+  "presets": ["react-native"]
 }

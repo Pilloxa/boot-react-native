@@ -3,7 +3,7 @@
  :resource-paths   #{"resources"}
  :exclusions ['cljsjs/react]
  :dependencies '[
-                 [boot-react-native/boot-react-native      "0.3-rc2" :scope "test"]
+                 [boot-react-native/boot-react-native      "0.3-rc1337" :scope "test"]
                  [adzerk/boot-cljs               "1.7.228-1"       :scope  "test"]
                  [adzerk/boot-cljs-repl          "0.3.3"           :scope  "test"]
                  [adzerk/boot-reload             "0.4.12"          :scope  "test"]
@@ -12,7 +12,9 @@
                  [org.clojure/tools.nrepl        "0.2.12"          :scope  "test"]
                  [org.clojure/clojure            "1.8.0"]
                  [org.clojure/clojurescript      "1.8.51"]
-                 [reagent                        "0.6.0-rc"]
+                 [reagent "0.6.1" :exclusions [cljsjs/react
+                                 cljsjs/react-dom
+                                 cljsjs/react-dom-server]]
                  ;; [react-native-externs "0.0.1-SNAPSHOT"]
                  ]
  )
