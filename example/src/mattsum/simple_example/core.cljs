@@ -7,8 +7,8 @@
 
 ;; we need set! for advanced compilation
 
-(set! js/React (js/require "react-native/Libraries/react-native/react-native.js"))
-(defonce react (js/require "react-native/Libraries/react-native/react-native.js"))
+;;(set! js/React (js/require "react-native"))
+(defonce react (js/require "react-native"))
 
 ;; Assets need to be relative path, starting from the `app/build/node_modules'
 ;; directory. The packager only finds images located in the `app/' folder
@@ -47,12 +47,16 @@
                          :underlay-color "#f0f0f0"}
     [text {:style {:font-family "Helvetica"
                    :font-size 14}}
-     "Count: " (:count @!state) ", click to increase"]]])
+     "Counter: " (:count @!state) ", click to increase"]]])
+
+(def cnt (r/atom 0))
+
 
 (defn root-container
   "Wraps root-view. This is to make sure live reloading using boot-reload and
   reagent works as expected. Instead of editing root-container, edit root-view"
   []
+  @cnt
   [root-view])
 
 (defn ^:export main
@@ -73,4 +77,4 @@
   ;; components are identified by numbers. The first root components
   ;; is assigned the number 1.
 
-  (r/render #'root-container 1))
+  (swap! cnt inc))
