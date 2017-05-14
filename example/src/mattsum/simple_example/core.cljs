@@ -38,7 +38,7 @@
    [text {:style {:font-family "Helvetica"
                   :font-size 20
                   :margin-bottom 20}}
-    "Welcome to boot-react-native"]
+    "Welcome to boot-react-native with figwheel!!!"]
    #_[image {:style {:width 350
                    :height 348
                    :margin-bottom 20}
