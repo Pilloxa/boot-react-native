@@ -102,46 +102,46 @@
         (println "Error: " e)))))
 
 ;;; Each file maybe corresponds to multiple modules.
-;(defn watch-for-external-modules
-  ;[]
-  ;(let [path ".js-modules.edn"]
-    ;(hawk/watch! [{:paths ["src"]
-                   ;:filter hawk/file?
-                   ;:handler (fn [ctx {:keys [kind file] :as event}]
-                              ;(let [m (edn/read-string (slurp path))
-                                    ;file-name   (-> (.getPath file)
-                                                    ;(str/replace (str (System/getProperty "user.dir") "/") ""))]
+(defn watch-for-external-modules
+  []
+  (let [path ".js-modules.edn"]
+    (hawk/watch! [{:paths ["src"]
+                   :filter hawk/file?
+                   :handler (fn [ctx {:keys [kind file] :as event}]
+                              (let [m (edn/read-string (slurp path))
+                                    file-name   (-> (.getPath file)
+                                                    (str/replace (str (System/getProperty "user.dir") "/") ""))]
 
-                                ;;; file is deleted
-                                ;(when (= :delete kind)
-                                  ;(let [new-m (dissoc m file-name)]
-                                    ;(spit path new-m)
-                                    ;(rebuild-env-index (flatten (vals new-m)))))
+                                ;; file is deleted
+                                (when (= :delete kind)
+                                  (let [new-m (dissoc m file-name)]
+                                    (spit path new-m)
+                                    (rebuild-env-index (flatten (vals new-m)))))
 
-                                ;(when (.exists file)
-                                  ;(let [content (slurp file)
-                                        ;js-modules (some->>
-                                                    ;content
-                                                    ;(re-seq #"\(js/require \"([^\"]+)\"\)")
-                                                    ;(map last)
-                                                    ;(vec))
-                                        ;commented-modules (some->>
-                                                           ;content
-                                                           ;(re-seq #"[;]+[\s]*\(js/require \"([^\"]+)\"\)")
-                                                           ;(map last)
-                                                           ;(set))
-                                        ;js-modules (if commented-modules
-                                                     ;(vec (remove commented-modules js-modules))
-                                                     ;js-modules)]
-                                    ;(let [old-js-modules (get m file-name)]
-                                      ;(when (not= old-js-modules js-modules)
-                                        ;(let [new-m (if (seq js-modules)
-                                                      ;(assoc m file-name js-modules)
-                                                      ;(dissoc m file-name))]
-                                          ;(spit path new-m)
+                                (when (.exists file)
+                                  (let [content (slurp file)
+                                        js-modules (some->>
+                                                    content
+                                                    (re-seq #"\(js/require \"([^\"]+)\"\)")
+                                                    (map last)
+                                                    (vec))
+                                        commented-modules (some->>
+                                                           content
+                                                           (re-seq #"[;]+[\s]*\(js/require \"([^\"]+)\"\)")
+                                                           (map last)
+                                                           (set))
+                                        js-modules (if commented-modules
+                                                     (vec (remove commented-modules js-modules))
+                                                     js-modules)]
+                                    (let [old-js-modules (get m file-name)]
+                                      (when (not= old-js-modules js-modules)
+                                        (let [new-m (if (seq js-modules)
+                                                      (assoc m file-name js-modules)
+                                                      (dissoc m file-name))]
+                                          (spit path new-m)
 
-                                          ;(rebuild-env-index (flatten (vals new-m)))))))))
-                              ;ctx)}])))
+                                          (rebuild-env-index (flatten (vals new-m)))))))))
+                              ctx)}])))
 
 (defn rebuild-modules
   []
@@ -218,4 +218,4 @@
   (enable-source-maps)
   (write-main-js)
   (write-env-dev)
-  #_(watch-for-external-modules))
+  (watch-for-external-modules))
