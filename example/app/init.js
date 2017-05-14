@@ -1,13 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
 'use strict';
 
-// global.window = {};
-
-// hack: get reagent to find ReactNative.render as ReactDOM.render
-global.ReactDOM = require('react-native');
-
-require('./build/main.js');
+// cljsbuild adds a preamble mentioning goog so hack around it
+window.goog = {
+  provide() {},
+  require() {},
+};
+require('./target/env/index.js');
