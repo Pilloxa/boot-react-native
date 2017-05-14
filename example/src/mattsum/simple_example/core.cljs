@@ -28,7 +28,7 @@
 
 (defonce !state (r/atom {:count 0}))
 
-(defn root-view
+(defn ^:export root-view
   []
   (js/console.log "### rendering BRO")
   [view {:style {:margin-top 50
@@ -52,15 +52,6 @@
                    :font-size 14}}
      "Counter: " (:count @!state) ", click to increase"]]])
 
-(def cnt (r/atom 0))
-
-
-(defn root-container
-  "Wraps root-view. This is to make sure live reloading using boot-reload and
-  reagent works as expected. Instead of editing root-container, edit root-view"
-  []
-  @cnt
-  [root-view])
 
 (defn ^:export main
   []
@@ -68,5 +59,5 @@
   (enable-console-print!)
   (.registerComponent (.-AppRegistry react)
                       "SimpleExampleApp"
-                      #(r/reactify-component #'root-container)))
+                      #(r/reactify-component #'root-view)))
 
