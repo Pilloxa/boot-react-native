@@ -10,15 +10,15 @@
                  [com.cemerick/piggieback        "0.2.1"           :scope  "test"]
                  [weasel                         "0.7.0"           :scope  "test"]
                  [org.clojure/tools.nrepl        "0.2.13"          :scope  "test"]
-                 [org.clojure/clojure            "1.9.0-alpha10"]
+                 [org.clojure/clojure            "1.9.0-alpha16"]
                  [org.clojure/clojurescript      "1.9.542"]
                  [reagent "0.6.1" :exclusions [cljsjs/react
                                  cljsjs/react-dom
                                  cljsjs/react-dom-server]]
-                 [ajchemist/boot-figwheel "0.5.4-6" :scope "test"] ;; latest release
+                 [ajchemist/boot-figwheel "0.5.10-SNAPSHOT" :scope "test"] ;; latest release
                  [org.clojure/tools.nrepl "0.2.12" :scope "test"]
                  [com.cemerick/piggieback "0.2.1" :scope "test"]
-                 [figwheel-sidecar "0.5.4-7" :scope "test"]
+                 [figwheel-sidecar "0.5.10" :scope "test"]
                  [react-native-externs "0.0.2-SNAPSHOT" :scope "test"]
                  ]
  )
