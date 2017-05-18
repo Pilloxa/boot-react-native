@@ -7,7 +7,7 @@
           (partial map (fn [[k v]] [k (cond-> v (#{"clojars"} k) (assoc :username (System/getenv "CLOJARS_USER"),
                                                                         :password (System/getenv "CLOJARS_PASS")))])))
 
-(def +version+ "0.4")
+(def +version+ "0.4-SNAPSHOT")
 
 (task-options!
  pom {:project 'org.clojars.vikeri/boot-react-native
