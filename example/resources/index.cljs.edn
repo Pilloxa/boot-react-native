@@ -1,0 +1,11 @@
+{:require [mattsum.simple-example.core]
+ :init-fns [mattsum.simple-example.core/main]
+ :compiler-options {:static-fns    true
+                    ;:externs       ["app/js/externs.js"]
+                    :parallel-build     true
+                    :optimize-constants true
+                    ;:optimizations :none
+                    :optimizations :advanced
+                    :closure-defines {"goog.DEBUG" false}
+                    }}
+

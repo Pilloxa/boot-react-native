@@ -15,19 +15,22 @@
 ;; (the directory that contains package.json) or below.
 ;;
 ;; We use `defonce' to prevent errors on subsequent reloads.
+(js/console.log "IN CLJS LAND" react)
 
-(defonce logo (js/require "../../assets/cljs.png"))
+;(defonce logo (js/require "../../assets/cljs.png"))
 
 (def view (r/adapt-react-class (.-View react)))
 (def text (r/adapt-react-class (.-Text react)))
 (def touchable-highlight (r/adapt-react-class (.-TouchableHighlight react)))
 (def image (r/adapt-react-class (.-Image react)))
 
+(js/console.log view)
 
 (defonce !state (r/atom {:count 0}))
 
-(defn root-view
+(defn ^:export root-view
   []
+  (js/console.log "### rendering BRO")
   [view {:style {:margin-top 50
                  :margin-left 8
                  :justify-content "center"
@@ -35,8 +38,8 @@
    [text {:style {:font-family "Helvetica"
                   :font-size 20
                   :margin-bottom 20}}
-    "Welcome to boot-react-native"]
-   [image {:style {:width 350
+    "Welcome to boot-react-native with figwheel!!!"]
+   #_[image {:style {:width 350
                    :height 348
                    :margin-bottom 20}
            :source logo}]
@@ -49,32 +52,12 @@
                    :font-size 14}}
      "Counter: " (:count @!state) ", click to increase"]]])
 
-(def cnt (r/atom 0))
-
-
-(defn root-container
-  "Wraps root-view. This is to make sure live reloading using boot-reload and
-  reagent works as expected. Instead of editing root-container, edit root-view"
-  []
-  @cnt
-  [root-view])
 
 (defn ^:export main
   []
-  (js/console.log "MAIN")
+  (js/console.log "##### MAIN")
   (enable-console-print!)
   (.registerComponent (.-AppRegistry react)
                       "SimpleExampleApp"
-                      #(r/reactify-component #'root-container)))
+                      #(r/reactify-component #'root-view)))
 
-(defn on-js-reload
-  []
-  (println "on-js-reload. state:" (pr-str @!state))
-
-  ;; Force re-render
-  ;;
-  ;; In React native, there are no DOM nodes. Instead, mounted
-  ;; components are identified by numbers. The first root components
-  ;; is assigned the number 1.
-
-  (swap! cnt inc))

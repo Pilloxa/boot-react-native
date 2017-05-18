@@ -1,4 +1,3 @@
-
 (set-env! :resource-paths #{"src" "resources"}
           :dependencies '[[pandeiro/boot-http "0.7.1-SNAPSHOT" :scope  "test"]
                           [com.cemerick/url "0.1.1"]
@@ -8,14 +7,14 @@
           (partial map (fn [[k v]] [k (cond-> v (#{"clojars"} k) (assoc :username (System/getenv "CLOJARS_USER"),
                                                                         :password (System/getenv "CLOJARS_PASS")))])))
 
-(def +version+ "0.3-rc1337")
+(def +version+ "0.4-SNAPSHOT")
 
 (task-options!
- pom {:project 'boot-react-native/boot-react-native
+ pom {:project 'org.clojars.vikeri/boot-react-native
       :version +version+
       :description "Boot tasks to integrate ClojureScript boot tasks (reload, repl, cljs-build) with React Native packager"
-      :url "https://github.com/mjmeintjes/boot-react-native"
-      :scm {:url "https://github.com/mjmeintjes/boot-react-native"}
+      :url "https://github.com/vikeri/boot-react-native"
+      :scm {:url "https://github.com/vikeri/boot-react-native"}
       :license {"Eclipse Public License"
                 "http://www.eclipse.org/legal/epl-v10.html"}})
 

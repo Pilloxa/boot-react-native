@@ -1,3 +1,0 @@
-{:require  [mattsum.simple-example.core]
- :init-fns [mattsum.simple-example.core/main]
- :compiler-options {:optimizations :none}}

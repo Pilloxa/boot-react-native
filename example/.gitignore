@@ -1,1 +1,4 @@
 .DS_Store
+.js-modules.edn
+figwheel_server.log
+env/dev/env/dev.cljs
